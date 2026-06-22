@@ -53,8 +53,9 @@
     <!-- Top Bar -->
     <div class="dash-topbar">
         <div class="greeting">
-            <h2>Welcome back, <span id="userName">Photographer</span>!</h2>
+                <h2>Welcome back, <span id="userName">Photographer</span>!</h2>
             <p id="dateDisplay"></p>
+            <p style="color:var(--text-muted);font-size:0.85rem;margin:2px 0 0;"><i class="bi bi-envelope"></i> <span id="userEmail"></span></p>
         </div>
         <div class="topbar-actions">
             <div class="search-box">
@@ -362,7 +363,9 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const storedName = localStorage.getItem('lensflare_user') || 'Photographer';
+    const storedEmail = localStorage.getItem('lensflare_email') || '';
     document.getElementById('userName').textContent = storedName;
+    document.getElementById('userEmail').textContent = storedEmail;
     document.getElementById('userAvatarBtn').textContent = storedName.charAt(0).toUpperCase();
 
     const now = new Date();

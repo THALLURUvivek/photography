@@ -164,10 +164,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     } else {
                         // Signin success — store user + role and go to dashboard
                         const emailInput = form.querySelector('#signinEmail');
-                        const userName = emailInput ? emailInput.value.split('@')[0] : 'Photographer';
+                        const email = emailInput ? emailInput.value.trim() : '';
+                        const userName = email ? email.split('@')[0] : 'Photographer';
                         const roleInput = form.querySelector('input[name="signinRole"]:checked');
                         const role = roleInput ? roleInput.value : 'customer';
                         localStorage.setItem('lensflare_user', userName);
+                        localStorage.setItem('lensflare_email', email);
                         localStorage.setItem('lensflare_role', role);
 
                         const dashUrl = roleDashboards[role] || 'dashboard.html';
