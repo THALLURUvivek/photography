@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Lensflare Studio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .filter-tabs { display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-bottom:40px; }
+        .filter-tab { padding:10px 24px; border-radius:50px; border:1px solid var(--card-border); background:transparent; color:var(--text-muted); font-weight:500; cursor:pointer; transition:var(--transition); font-size:0.9rem; }
+        .filter-tab:hover, .filter-tab.active { background:var(--gradient); color:#fff; border-color:transparent; transform:translateY(-2px); }
+
+        .portfolio-grid .grid-item { transition:var(--transition); }
+        .portfolio-grid .grid-item.hide { display:none; }
+
+        .gallery-card-custom { position:relative; overflow:hidden; border-radius:var(--radius); cursor:pointer; }
+        .gallery-card-custom img { width:100%; height:350px; object-fit:cover; transition:transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94); }
+        .gallery-card-custom:hover img { transform:scale(1.12); }
+        .gallery-card-custom .overlay-custom { position:absolute; inset:0; background:linear-gradient(to top,rgba(10,10,35,0.9) 0%,transparent 60%); display:flex; flex-direction:column; justify-content:flex-end; padding:25px; opacity:0; transition:opacity 0.4s ease; }
+        .gallery-card-custom:hover .overlay-custom { opacity:1; }
+        .gallery-card-custom .overlay-custom h5 { color:#fff; margin-bottom:4px; transform:translateY(20px); transition:transform 0.4s ease 0.1s; }
+        .gallery-card-custom .overlay-custom span { color:var(--primary); font-size:0.8rem; font-weight:600; text-transform:uppercase; letter-spacing:1px; transform:translateY(20px); transition:transform 0.4s ease 0.2s; }
+        .gallery-card-custom:hover .overlay-custom h5,
+        .gallery-card-custom:hover .overlay-custom span { transform:translateY(0); }
+        .gallery-card-custom .zoom-icon { position:absolute; top:20px; right:20px; width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.15); backdrop-filter:blur(10px); display:flex; align-items:center; justify-content:center; color:#fff; font-size:1rem; opacity:0; transform:scale(0.5); transition:all 0.4s ease; }
+        .gallery-card-custom:hover .zoom-icon { opacity:1; transform:scale(1); }
+
+        .tall-card img { height:500px; }
+        @media (max-width:991px) {
+            .gallery-card-custom img { height:300px; }
+            .tall-card img { height:380px; }
+        }
+        @media (max-width:768px) {
+            .gallery-card-custom img { height:260px; }
+            .tall-card img { height:320px; }
+        }
+        @media (max-width:576px) {
+            .gallery-card-custom img { height:220px; }
+            .tall-card img { height:260px; }
+        }
+
+        .lightbox-custom { position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:99999; display:none; align-items:center; justify-content:center; backdrop-filter:blur(10px); }
+        .lightbox-custom.active { display:flex; }
+        .lightbox-custom img { max-width:90%; max-height:88%; border-radius:12px; }
+        .lightbox-custom .lb-close { position:absolute; top:30px; right:40px; color:#fff; font-size:2.5rem; cursor:pointer; background:none; border:none; transition:transform 0.3s; z-index:10; }
+        .lightbox-custom .lb-close:hover { transform:rotate(90deg); color:var(--primary); }
+        .lightbox-custom .lb-prev, .lightbox-custom .lb-next { position:absolute; top:50%; transform:translateY(-50%); width:50px; height:50px; border-radius:50%; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#fff; font-size:1.3rem; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:var(--transition); }
+        .lightbox-custom .lb-prev:hover, .lightbox-custom .lb-next:hover { background:var(--gradient); }
+        .lightbox-custom .lb-prev { left:30px; }
+        .lightbox-custom .lb-next { right:30px; }
+        @media (max-width:576px) {
+            .lightbox-custom .lb-prev, .lightbox-custom .lb-next { width:40px; height:40px; font-size:1rem; }
+            .lightbox-custom .lb-prev { left:10px; }
+            .lightbox-custom .lb-next { right:10px; }
+            .lightbox-custom .lb-close { top:15px; right:15px; font-size:1.8rem; }
+            .lightbox-custom img { max-width:92%; max-height:70%; }
+        }
+        .lightbox-custom .lb-counter { position:absolute; bottom:30px; color:var(--text-muted); font-size:0.85rem; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-modern">
+    <div class="container">
+        <a class="brand-text" href="index.html"><img src="images/OIP.webp" alt="Lensflare Studio" class="navbar-logo"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMain">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link-custom" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link-custom" href="about.html">About</a></li>
+                <li class="nav-item"><a class="nav-link-custom active" href="portfolio.html">Portfolio</a></li>
+                <li class="nav-item"><a class="nav-link-custom" href="services.html">Services</a></li>
+                <li class="nav-item"><a class="nav-link-custom" href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-buttons d-flex gap-2">
+                <a href="signin.html" class="btn nav-btn nav-btn-outline">Sign In</a>
+                <a href="signup.html" class="btn nav-btn nav-btn-primary">Get Started</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<section class="page-hero">
+    <div class="hero-bg-img" style="background-image:url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=2000&auto=format&fit=crop');"></div>
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+        <div class="page-badge"><i class="bi bi-images"></i> Our Portfolio</div>
+        <h1>A Visual <span style="background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Journey</span></h1>
+        <p>Explore our curated collection of photographs showcasing creativity, emotion, and technical mastery.</p>
+    </div>
+</section>
+
+<section class="section-modern" style="background:var(--surface);">
+    <div class="container">
+        <div class="filter-tabs" id="filterTabs">
+            <button class="filter-tab active" data-filter="all">All</button>
+            <button class="filter-tab" data-filter="wedding">Weddings</button>
+            <button class="filter-tab" data-filter="portrait">Portraits</button>
+            <button class="filter-tab" data-filter="event">Events</button>
+            <button class="filter-tab" data-filter="commercial">Commercial</button>
+        </div>
+
+        <div class="row g-4 portfolio-grid">
+            <div class="col-lg-4 col-md-6 grid-item fade-up delay-1" data-category="wedding">
+                <div class="gallery-card-custom" onclick="openLightbox(0)">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop" alt="">
+                    <div class="zoom-icon"><i class="bi bi-arrows-expand"></i></div>
+                    <div class="overlay-custom"><h5>Elegant Wedding</h5><span>Wedding Photography</span></div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 grid-item fade-up delay-2" data-category="portrait">
+                <div class="gallery-card-custom" onclick="openLightbox(1)">
+                    <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop" alt="">
+                    <div class="zoom-icon"><i class="bi bi-arrows-expand"></i></div>
+                    <div class="overlay-custom"><h5>Artistic Portrait</h5><span>Portrait Photography</span></div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 grid-item fade-up delay-3" data-category="event">
+                <div class="gallery-card-custom" onclick="openLightbox(2)">
+                    <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=800&auto=format&fit=crop" alt="">
+                    <div class="zoom-icon"><i class="bi bi-arrows-expand"></i></div>
+                    <div class="overlay-custom"><h5>Corporate Event</h5><span>Event Photography</span></div>
+                </div>
+            </div>
+            <div class="col-lg-8 grid-item fade-up delay-4" data-category="commercial">
+                <div class="gallery-card-custom tall-card" onclick="openLightbox(3)">
+                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" alt="">
+                    <div class="zoom-icon"><i class="bi bi-arrows-expand"></i></div>
+                    <div class="overlay-custom"><h5>Product Showcase</h5><span>Commercial Photography</span></div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 grid-item fade-up delay-5" data-category="wedding">
+                <div class="gallery-card-custom" onclick="openLightbox(4)">
+                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800&auto=format&fit=crop" alt="">
+                    <div class="zoom-icon"><i class="bi bi-arrows-expand"></i></div>
+                    <div class="overlay-custom"><h5>Beach Wedding</h5><span>Wedding Photography</span></div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 grid-item fade-up delay-6" data-category="portrait">
+                <div class="gallery-card-custom" onclick="openLightbox(5)">
+                    <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?q=80&w=800&auto=format&fit=crop" alt="">
+                    <div class="zoom-icon"><i class="bi bi-arrows-expand"></i></div>
+                    <div class="overlay-custom"><h5>Natural Light Portrait</h5><span>Portrait Photography</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox-custom" id="lightbox">
+    <button class="lb-close" onclick="closeLightbox()">&times;</button>
+    <button class="lb-prev" onclick="changeImage(-1)"><i class="bi bi-chevron-left"></i></button>
+    <img id="lbImage" src="" alt="">
+    <button class="lb-next" onclick="changeImage(1)"><i class="bi bi-chevron-right"></i></button>
+    <div class="lb-counter" id="lbCounter"></div>
+</div>
+
+<section class="section-modern" style="background:var(--dark);">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6 text-center">
+                <h3 class="counter-num" data-target="12" data-suffix="+" style="font-size:3rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:'Inter',sans-serif;">0</h3>
+                <p style="color:var(--text-muted);">Years Experience</p>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <h3 class="counter-num" data-target="850" data-suffix="+" style="font-size:3rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:'Inter',sans-serif;">0</h3>
+                <p style="color:var(--text-muted);">Happy Clients</p>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <h3 class="counter-num" data-target="3200" data-suffix="+" style="font-size:3rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:'Inter',sans-serif;">0</h3>
+                <p style="color:var(--text-muted);">Projects Delivered</p>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <h3 class="counter-num" data-target="15" data-suffix="+" style="font-size:3rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:'Inter',sans-serif;">0</h3>
+                <p style="color:var(--text-muted);">Awards Won</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-modern" style="background:var(--surface);">
+    <div class="container">
+        <div class="newsletter-box text-center">
+            <div class="section-tag" style="justify-content:center;"><i class="bi bi-camera"></i> Inspired?</div>
+            <h2 class="section-title" style="font-size:2.2rem;">Let's Create Your <span class="highlight">Masterpiece</span></h2>
+            <p style="color:var(--text-muted);max-width:550px;margin:15px auto 30px;">Every great project starts with a conversation. Tell us your vision and we'll bring it to life.</p>
+            <a href="contact.html" class="btn btn-gradient" style="padding:16px 40px;">Book Your Session</a>
+        </div>
+    </div>
+</section>
+
+<footer class="footer-modern">
+    <div class="container">
+        <div class="row gy-5">
+            <div class="col-lg-4">
+                <a class="footer-brand" href="index.html"><img src="images/OIP.webp" alt="Lensflare Studio" class="footer-logo"></a>
+                <p>Professional photography services capturing life's most precious moments.</p>
+            </div>
+            <div class="col-lg-2 offset-lg-1">
+                <h5>Quick Links</h5>
+                <ul>
+                    <li><a href="index.html"><i class="bi bi-chevron-right"></i>Home</a></li>
+                    <li><a href="about.html"><i class="bi bi-chevron-right"></i>About</a></li>
+                    <li><a href="portfolio.html"><i class="bi bi-chevron-right"></i>Portfolio</a></li>
+                    <li><a href="services.html"><i class="bi bi-chevron-right"></i>Services</a></li>
+                    <li><a href="contact.html"><i class="bi bi-chevron-right"></i>Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-2">
+                <h5>Account</h5>
+                <ul>
+                    <li><a href="signin.html"><i class="bi bi-chevron-right"></i>Sign In</a></li>
+                    <li><a href="signup.html"><i class="bi bi-chevron-right"></i>Sign Up</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h5>Follow Us</h5>
+                <div class="social-links">
+                    <a href="error.html"><i class="bi bi-instagram"></i></a>
+                    <a href="error.html"><i class="bi bi-facebook"></i></a>
+                    <a href="error.html"><i class="bi bi-pinterest"></i></a>
+                    <a href="error.html"><i class="bi bi-youtube"></i></a>
+                    <a href="error.html"><i class="bi bi-tiktok"></i></a>
+                </div>
+                <p style="margin-top:15px;font-size:0.85rem;"><i class="bi bi-geo-alt"></i> 123 Creative Ave, NYC</p>
+            </div>
+        </div>
+        <hr>
+        <div class="text-center copyright"><p>&copy; 2026 Lensflare Studio. All Rights Reserved.</p></div>
+    </div>
+</footer>
+
+<script>
+    const images = [
+        'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1200&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1200&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1200&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1519699047748-de8e457a634e?q=80&w=1200&auto=format&fit=crop'
+    ];
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+        currentIndex = index;
+        document.getElementById('lbImage').src = images[currentIndex];
+        document.getElementById('lightbox').classList.add('active');
+        document.getElementById('lbCounter').textContent = (currentIndex + 1) + ' / ' + images.length;
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('active');
+    }
+
+    function changeImage(dir) {
+        currentIndex = (currentIndex + dir + images.length) % images.length;
+        document.getElementById('lbImage').src = images[currentIndex];
+        document.getElementById('lbCounter').textContent = (currentIndex + 1) + ' / ' + images.length;
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') changeImage(-1);
+        if (e.key === 'ArrowRight') changeImage(1);
+    });
+
+    document.getElementById('lightbox').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) closeLightbox();
+    });
+
+    // Filters with animation
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            const filter = tab.dataset.filter;
+            document.querySelectorAll('.grid-item').forEach(item => {
+                const match = filter === 'all' || item.dataset.category === filter;
+                if (match) {
+                    item.classList.remove('hide', 'fade-filter');
+                    item.style.display = '';
+                    item.offsetHeight;
+                    item.classList.add('show-filter');
+                } else {
+                    item.classList.remove('show-filter');
+                    item.classList.add('fade-filter');
+                    setTimeout(() => {
+                        item.classList.add('hide');
+                        item.style.display = 'none';
+                    }, 300);
+                }
+            });
+        });
+    });
+
+    // Initial show-filter on load
+    document.querySelectorAll('.grid-item').forEach(item => {
+        item.classList.add('show-filter');
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

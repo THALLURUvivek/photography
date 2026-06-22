@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Lensflare Studio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/dash-customer.css">
+</head>
+<script>
+    if (localStorage.getItem('lensflare_role') && localStorage.getItem('lensflare_role') !== 'customer') {
+        const roleDashboards = { admin: 'dashboard.html', photographer: 'dash-photographer.html' };
+        window.location.href = roleDashboards[localStorage.getItem('lensflare_role')] || 'index.html';
+    }
+</script>
+<body class="dashboard-body">
+
+<button class="sidebar-toggle" id="sidebarToggle"><i class="bi bi-list"></i></button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<aside class="dash-sidebar" id="dashSidebar">
+    <div class="sidebar-brand">
+        <a href="index.html"><img src="images/OIP.webp" alt="Lensflare Studio" class="sidebar-logo"></a>
+        <button class="sidebar-close" id="sidebarClose"><i class="bi bi-x"></i></button>
+    </div>
+    <nav class="sidebar-nav">
+        <div class="nav-label">Main</div>
+        <a href="dash-customer.html" class="nav-item active"><i class="bi bi-grid-fill"></i> Dashboard</a>
+        <a href="#" class="nav-item"><i class="bi bi-calendar-check"></i> My Bookings</a>
+        <a href="#" class="nav-item"><i class="bi bi-images"></i> My Gallery</a>
+        <a href="#" class="nav-item"><i class="bi bi-file-earmark-text"></i> Invoices</a>
+        <a href="#" class="nav-item"><i class="bi bi-chat-dots"></i> Messages <span class="badge-count" style="margin-left:auto;">2</span></a>
+
+        <div class="nav-label" style="margin-top:20px;">Account</div>
+        <a href="#" class="nav-item"><i class="bi bi-person"></i> Profile</a>
+        <a href="#" class="nav-item"><i class="bi bi-gear"></i> Settings</a>
+        <a href="index.html" class="nav-item" id="signOutBtn" style="color:var(--secondary);"><i class="bi bi-box-arrow-left"></i> Sign Out</a>
+    </nav>
+</aside>
+
+<main class="dash-main">
+
+    <div class="dash-topbar">
+        <div class="greeting">
+            <h2>Welcome back, <span id="userName">Customer</span>!</h2>
+            <p id="dateDisplay"></p>
+        </div>
+        <div class="topbar-actions">
+            <div class="search-box">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Search...">
+            </div>
+            <button class="notif-btn">
+                <i class="bi bi-bell"></i>
+                <span class="badge-dot"></span>
+            </button>
+            <div class="user-dropdown">
+                <div class="user-avatar" id="userAvatarBtn">C</div>
+                <div class="user-dropdown-menu" id="userDropdown">
+                    <a href="#"><i class="bi bi-person"></i> My Profile</a>
+                    <a href="#"><i class="bi bi-gear"></i> Settings</a>
+                    <hr style="border-color:var(--card-border);margin:4px 0;">
+                    <a href="index.html" class="danger" id="signOutDropdown"><i class="bi bi-box-arrow-left"></i> Sign Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dash-stats">
+        <div class="stat-card fade-up">
+            <div class="stat-header">
+                <div class="stat-icon purple"><i class="bi bi-calendar-check"></i></div>
+                <span class="stat-change up"><i class="bi bi-arrow-up"></i> 2</span>
+            </div>
+            <h3 class="counter-num" data-target="6">0</h3>
+            <p>Upcoming Sessions</p>
+        </div>
+        <div class="stat-card fade-up delay-1">
+            <div class="stat-header">
+                <div class="stat-icon blue"><i class="bi bi-images"></i></div>
+                <span class="stat-change up"><i class="bi bi-arrow-up"></i> 45</span>
+            </div>
+            <h3 class="counter-num" data-target="328">0</h3>
+            <p>Photos Received</p>
+        </div>
+        <div class="stat-card fade-up delay-2">
+            <div class="stat-header">
+                <div class="stat-icon green"><i class="bi bi-check-circle"></i></div>
+                <span class="stat-change up"><i class="bi bi-arrow-up"></i> 3</span>
+            </div>
+            <h3 class="counter-num" data-target="12">0</h3>
+            <p>Completed Sessions</p>
+        </div>
+        <div class="stat-card fade-up delay-3">
+            <div class="stat-header">
+                <div class="stat-icon orange"><i class="bi bi-currency-dollar"></i></div>
+                <span class="stat-change up"><i class="bi bi-arrow-up"></i> $200</span>
+            </div>
+            <h3 class="counter-num" data-target="2840">0</h3>
+            <p>Total Spent</p>
+        </div>
+    </div>
+
+    <div class="dash-card fade-up" style="margin-bottom:24px;">
+        <div class="card-header">
+            <h4><i class="bi bi-calendar-check" style="margin-right:8px;color:var(--primary);"></i> My Bookings</h4>
+            <a href="#">View All <i class="bi bi-arrow-right"></i></a>
+        </div>
+        <div class="table-responsive">
+        <table class="bookings-table">
+            <thead>
+                <tr>
+                    <th>Photographer</th>
+                    <th>Service</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="client-info">
+                            <div class="client-avatar" style="background:var(--gradient);">J</div>
+                            <div><span>John Photography</span><small>Senior Photographer</small></div>
+                        </div>
+                    </td>
+                    <td>Wedding</td>
+                    <td>Jun 28, 2026</td>
+                    <td><span class="status-badge confirmed">Confirmed</span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="client-info">
+                            <div class="client-avatar" style="background:#4CAF50;">M</div>
+                            <div><span>Mike Photo</span><small>Portrait Specialist</small></div>
+                        </div>
+                    </td>
+                    <td>Portrait</td>
+                    <td>Jul 5, 2026</td>
+                    <td><span class="status-badge pending">Pending</span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="client-info">
+                            <div class="client-avatar" style="background:#2196F3;">E</div>
+                            <div><span>Emily Studios</span><small>Event Photographer</small></div>
+                        </div>
+                    </td>
+                    <td>Corporate</td>
+                    <td>Jul 12, 2026</td>
+                    <td><span class="status-badge confirmed">Confirmed</span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="client-info">
+                            <div class="client-avatar" style="background:#FF9800;">D</div>
+                            <div><span>David Park</span><small>Commercial Photog</small></div>
+                        </div>
+                    </td>
+                    <td>Commercial</td>
+                    <td>Jun 10, 2026</td>
+                    <td><span class="status-badge completed">Completed</span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="client-info">
+                            <div class="client-avatar" style="background:var(--secondary);">S</div>
+                            <div><span>Sarah James</span><small>Freelancer</small></div>
+                        </div>
+                    </td>
+                    <td>Event</td>
+                    <td>May 28, 2026</td>
+                    <td><span class="status-badge cancelled">Cancelled</span></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+    <div class="dash-grid">
+        <div class="dash-card fade-up">
+            <div class="card-header">
+                <h4><i class="bi bi-clock" style="margin-right:8px;color:var(--primary);"></i> Upcoming Schedule</h4>
+                <span class="badge-count">Next 3</span>
+            </div>
+            <ul class="schedule-list">
+                <li>
+                    <div class="schedule-time"><strong>10:00</strong><small>AM</small></div>
+                    <div class="schedule-info">
+                        <h6>Wedding Photography</h6>
+                        <p>John Photography · Central Park</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="schedule-time"><strong>1:30</strong><small>PM</small></div>
+                    <div class="schedule-info">
+                        <h6>Portrait Session</h6>
+                        <p>Mike Photo · Downtown Studio</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="schedule-time"><strong>9:00</strong><small>AM</small></div>
+                    <div class="schedule-info">
+                        <h6>Corporate Event</h6>
+                        <p>Emily Studios · Convention Center</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="schedule-time"><strong>3:00</strong><small>PM</small></div>
+                    <div class="schedule-info">
+                        <h6>Commercial Shoot</h6>
+                        <p>David Park · Outdoor Location</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div>
+            <div class="dash-card fade-up delay-1">
+                <div class="card-header">
+                    <h4><i class="bi bi-images" style="margin-right:8px;color:var(--primary);"></i> Recent Galleries</h4>
+                    <a href="#">View All <i class="bi bi-arrow-right"></i></a>
+                </div>
+                <div class="gallery-grid">
+                    <div class="gallery-card">
+                        <div class="gallery-preview">
+                            <i class="bi bi-images"></i>
+                        </div>
+                        <div class="gallery-info">
+                            <h6>Wedding Gallery</h6>
+                            <span>45 photos · Jun 15, 2026</span>
+                        </div>
+                    </div>
+                    <div class="gallery-card">
+                        <div class="gallery-preview" style="background:rgba(76,175,80,0.1);color:#4CAF50;">
+                            <i class="bi bi-images"></i>
+                        </div>
+                        <div class="gallery-info">
+                            <h6>Portrait Session</h6>
+                            <span>28 photos · Jun 8, 2026</span>
+                        </div>
+                    </div>
+                    <div class="gallery-card">
+                        <div class="gallery-preview" style="background:rgba(33,150,243,0.1);color:#2196F3;">
+                            <i class="bi bi-images"></i>
+                        </div>
+                        <div class="gallery-info">
+                            <h6>Corporate Event</h6>
+                            <span>62 photos · May 22, 2026</span>
+                        </div>
+                    </div>
+                    <div class="gallery-card">
+                        <div class="gallery-preview" style="background:rgba(255,152,0,0.1);color:#FF9800;">
+                            <i class="bi bi-images"></i>
+                        </div>
+                        <div class="gallery-info">
+                            <h6>Commercial Shoot</h6>
+                            <span>18 photos · May 10, 2026</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="quick-actions">
+        <a href="#" class="quick-action-btn fade-up">
+            <i class="bi bi-plus-circle"></i>
+            <span>Book a Session</span>
+        </a>
+        <a href="#" class="quick-action-btn fade-up delay-1">
+            <i class="bi bi-images"></i>
+            <span>View Gallery</span>
+        </a>
+        <a href="#" class="quick-action-btn fade-up delay-2">
+            <i class="bi bi-envelope"></i>
+            <span>Contact Photographer</span>
+        </a>
+        <a href="#" class="quick-action-btn fade-up delay-3">
+            <i class="bi bi-file-earmark-text"></i>
+            <span>View Invoices</span>
+        </a>
+    </div>
+
+    <div class="dash-footer">
+        <p>&copy; 2026 Lensflare Studio. All rights reserved.</p>
+    </div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+<script>
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const storedName = localStorage.getItem('lensflare_user') || 'Customer';
+    document.getElementById('userName').textContent = storedName;
+
+    document.getElementById('userAvatarBtn').textContent = storedName.charAt(0).toUpperCase();
+
+    const now = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('dateDisplay').textContent = now.toLocaleDateString('en-US', options);
+
+    const sidebar = document.getElementById('dashSidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    const toggleBtn = document.getElementById('sidebarToggle');
+    document.getElementById('sidebarToggle').addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('active');
+        toggleBtn.classList.toggle('hidden');
+    });
+    overlay.addEventListener('click', closeSidebar);
+    document.getElementById('sidebarClose').addEventListener('click', closeSidebar);
+    function closeSidebar() {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('active');
+        toggleBtn.classList.remove('hidden');
+    }
+
+    const avatarBtn = document.getElementById('userAvatarBtn');
+    const dropdown = document.getElementById('userDropdown');
+    avatarBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle('show');
+    });
+    document.addEventListener('click', () => dropdown.classList.remove('show'));
+
+    const signOut = () => {
+        localStorage.removeItem('lensflare_user');
+        localStorage.removeItem('lensflare_role');
+        window.location.href = 'index.html';
+    };
+    document.getElementById('signOutBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        signOut();
+    });
+    document.getElementById('signOutDropdown').addEventListener('click', (e) => {
+        e.preventDefault();
+        signOut();
+    });
+
+});
+
+</script>
+</body>
+</html>

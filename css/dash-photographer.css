@@ -1,0 +1,231 @@
+/* ==========================================
+   PHOTOGRAPHER DASHBOARD OVERRIDES
+   Inherits from style.css & dashboard.css
+========================================== */
+
+/* ---- Earnings Overview ---- */
+.earnings-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.earning-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 4px 0;
+    transition: background 0.2s ease;
+    border-radius: 8px;
+    padding: 6px 8px;
+    margin: 0 -8px;
+}
+.earning-row:hover {
+    background: rgba(108,99,255,0.04);
+}
+
+.earning-month {
+    min-width: 90px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.earning-bar-wrap {
+    flex: 1;
+    height: 8px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.05);
+    overflow: hidden;
+    position: relative;
+}
+.earning-bar-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    background: linear-gradient(90deg, transparent, rgba(108,99,255,0.1), transparent);
+    animation: shimmer 2s infinite;
+}
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.earning-bar {
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--primary), #8B7FFF);
+    transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    box-shadow: 0 0 10px rgba(108,99,255,0.3);
+}
+
+.earning-amount {
+    min-width: 65px;
+    text-align: right;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+}
+
+.earning-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(108,99,255,0.1);
+}
+
+.earning-total span {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.earning-total strong {
+    font-size: 1.4rem;
+    font-weight: 800;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ---- Recent Uploads Grid ---- */
+.uploads-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.upload-thumb {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 1;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+.upload-thumb:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(108,99,255,0.15);
+}
+
+.upload-thumb-img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.upload-thumb:hover .upload-thumb-img {
+    transform: scale(1.12);
+}
+
+.upload-thumb-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,10,35,0.9) 0%, transparent 50%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+.upload-thumb:hover .upload-thumb-overlay {
+    opacity: 1;
+}
+
+.upload-thumb-overlay i {
+    font-size: 0.75rem;
+    color: var(--primary);
+}
+
+/* ---- Dashboard Footer ---- */
+.dash-footer {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(108,99,255,0.08);
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+}
+
+/* ---- Sidebar Badge Count ---- */
+.dash-sidebar .sidebar-nav .nav-item .badge-count {
+    background: linear-gradient(135deg, rgba(108,99,255,0.2) 0%, rgba(108,99,255,0.05) 100%);
+    color: var(--primary);
+    padding: 2px 9px;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-left: auto;
+    border: 1px solid rgba(108,99,255,0.1);
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+@media (max-width: 1200px) {
+    .uploads-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 991px) {
+    .earnings-summary { gap: 12px; }
+    .earning-month { min-width: 75px; font-size: 0.75rem; }
+    .earning-amount { font-size: 0.8rem; min-width: 55px; }
+    .earning-total strong { font-size: 1.2rem; }
+    .uploads-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .earnings-summary { gap: 10px; }
+    .earning-month { min-width: 65px; font-size: 0.7rem; }
+    .earning-bar-wrap { height: 6px; }
+    .earning-amount { font-size: 0.75rem; min-width: 50px; }
+    .earning-total { margin-top: 14px; padding-top: 14px; }
+    .earning-total span { font-size: 0.8rem; }
+    .earning-total strong { font-size: 1.1rem; }
+    .uploads-grid { gap: 8px; }
+}
+
+@media (max-width: 576px) {
+    .earnings-summary { gap: 10px; }
+    .earning-row { gap: 8px; }
+    .earning-month { min-width: 55px; font-size: 0.65rem; }
+    .earning-bar-wrap { height: 6px; }
+    .earning-amount { font-size: 0.7rem; min-width: 45px; }
+    .earning-total strong { font-size: 1rem; }
+    .uploads-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .upload-thumb-overlay { opacity: 1; font-size: 0.65rem; padding: 6px; background: linear-gradient(to top, rgba(10,10,35,0.85) 0%, transparent 50%); }
+    .dash-footer { font-size: 0.7rem; margin-top: 20px; padding-top: 14px; }
+}
+
+@media (max-width: 400px) {
+    .earning-row { gap: 6px; }
+    .earning-month { min-width: 50px; font-size: 0.6rem; }
+    .earning-bar-wrap { height: 5px; }
+    .earning-amount { font-size: 0.65rem; min-width: 40px; }
+    .earning-total { margin-top: 12px; padding-top: 12px; }
+    .earning-total span { font-size: 0.7rem; }
+    .earning-total strong { font-size: 0.9rem; }
+    .uploads-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+    .upload-thumb { border-radius: 8px; }
+    .upload-thumb-overlay { font-size: 0.6rem; padding: 4px; }
+    .dash-footer { font-size: 0.65rem; margin-top: 16px; padding-top: 12px; }
+}

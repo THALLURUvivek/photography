@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | Page Not Found | Lensflare Studio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .error-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--dark);
+            position: relative;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .error-page .orb {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: orbFloat 20s ease-in-out infinite alternate;
+        }
+        .error-page .orb:nth-child(1) {
+            width: 500px;
+            height: 500px;
+            background: rgba(108,99,255,0.25);
+            top: -150px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+        .error-page .orb:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            background: rgba(255,107,107,0.15);
+            bottom: -100px;
+            left: -80px;
+            animation-delay: -7s;
+        }
+        .error-page .orb:nth-child(3) {
+            width: 300px;
+            height: 300px;
+            background: rgba(108,99,255,0.12);
+            bottom: 20%;
+            right: 10%;
+            animation-delay: -14s;
+        }
+
+        @keyframes orbFloat {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(40px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 40px) scale(0.95); }
+            100% { transform: translate(30px, -20px) scale(1.05); }
+        }
+
+        .error-card {
+            background: rgba(18,18,58,0.85);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 32px;
+            padding: 70px 60px;
+            max-width: 580px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            box-shadow:
+                0 0 60px rgba(108,99,255,0.06),
+                inset 0 1px 0 rgba(255,255,255,0.06);
+        }
+
+        .error-card .camera-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 28px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .error-card .camera-icon .ring {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 2px solid rgba(108,99,255,0.2);
+            animation: ringPulse 2.5s ease-in-out infinite;
+        }
+        .error-card .camera-icon .ring:nth-child(2) {
+            inset: 14px;
+            border-color: rgba(108,99,255,0.12);
+            animation-delay: 0.8s;
+        }
+        .error-card .camera-icon .ring:nth-child(3) {
+            inset: 28px;
+            border-color: rgba(108,99,255,0.06);
+            animation-delay: 1.6s;
+        }
+        @keyframes ringPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.08); opacity: 0.5; }
+        }
+        .error-card .camera-icon i {
+            font-size: 3rem;
+            color: var(--primary);
+            position: relative;
+            z-index: 1;
+        }
+        .error-card .error-404 {
+            font-family: 'Playfair Display', serif;
+            font-size: 7rem;
+            font-weight: 900;
+            line-height: 1;
+            background: linear-gradient(135deg, #667eea, #764ba2, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 4px;
+            position: relative;
+            letter-spacing: -4px;
+        }
+        .error-card .error-404::after {
+            content: '404';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 9rem;
+            background: linear-gradient(135deg, #667eea, #764ba2, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: blur(30px);
+            opacity: 0.2;
+            z-index: -1;
+            letter-spacing: -4px;
+        }
+        .error-card .divider-line {
+            width: 60px;
+            height: 3px;
+            border-radius: 3px;
+            background: var(--gradient-2);
+            margin: 18px auto;
+        }
+        .error-card h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        .error-card .sub-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        .error-card .sub-text span {
+            color: var(--secondary);
+            font-style: italic;
+        }
+
+        .error-card .search-box {
+            display: flex;
+            align-items: center;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 50px;
+            padding: 4px 4px 4px 20px;
+            margin: 28px auto 30px;
+            max-width: 400px;
+            width: 100%;
+            transition: border-color 0.3s ease;
+        }
+        .error-card .search-box:focus-within {
+            border-color: var(--primary);
+        }
+        .error-card .search-box input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-size: 0.9rem;
+            padding: 10px 0;
+        }
+        .error-card .search-box input::placeholder {
+            color: rgba(255,255,255,0.3);
+        }
+        .error-card .search-box button {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: none;
+            background: var(--gradient);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex-shrink: 0;
+        }
+        .error-card .search-box button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(108,99,255,0.4);
+        }
+
+        .error-card .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 38px;
+            border-radius: 50px;
+            background: var(--gradient);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+        }
+        .error-card .btn-home:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(108,99,255,0.4);
+        }
+
+        @media (max-width: 991px) {
+            .error-card { padding: 55px 40px; }
+        }
+        @media (max-width: 768px) {
+            .error-card { padding: 50px 32px; }
+            .error-card .error-404 { font-size: 6rem; }
+        }
+        @media (max-width: 576px) {
+            .error-card {
+                padding: 45px 28px;
+                border-radius: 24px;
+            }
+            .error-card .error-404 {
+                font-size: 5rem;
+                letter-spacing: -2px;
+            }
+            .error-card .error-404::after {
+                font-size: 6.5rem;
+            }
+            .error-card h2 {
+                font-size: 1.25rem;
+            }
+            .error-card .camera-icon {
+                width: 90px;
+                height: 90px;
+            }
+            .error-card .camera-icon .ring:nth-child(2) {
+                inset: 10px;
+            }
+            .error-card .camera-icon .ring:nth-child(3) {
+                inset: 20px;
+            }
+            .error-card .quick-links {
+                gap: 16px;
+            }
+        }
+        @media (max-width: 400px) {
+            .error-card {
+                padding: 30px 18px;
+            }
+            .error-card .error-404 {
+                font-size: 3.8rem;
+            }
+            .error-card .error-404::after {
+                font-size: 5rem;
+            }
+            .error-card h2 {
+                font-size: 1.05rem;
+            }
+            .error-card .sub-text {
+                font-size: 0.82rem;
+            }
+            .error-card .search-box {
+                margin: 20px auto 22px;
+            }
+            .error-card .btn-home {
+                padding: 12px 28px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="error-page">
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+
+    <div class="error-card">
+        <div class="camera-icon">
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <i class="bi bi-camera-fill"></i>
+        </div>
+
+        <div class="error-404">404</div>
+        <div class="divider-line"></div>
+        <h2>This Frame Doesn't Exist</h2>
+        <p class="sub-text">Looks like you've ventured into uncharted territory.<br>The page you're looking for has <span>moved</span>, been <span>deleted</span>, or never existed.</p>
+
+        <div class="search-box">
+            <input type="text" placeholder="Search the site..." id="searchInput">
+            <button onclick="if(document.getElementById('searchInput').value.trim()){window.location.href='index.html'}else{document.getElementById('searchInput').focus();}">
+                <i class="bi bi-arrow-right"></i>
+            </button>
+        </div>
+
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+            <a href="index.html" class="btn-home">
+                <i class="bi bi-house-door"></i> Back to Home
+            </a>
+            <a href="javascript:history.back()" class="btn-home" style="background:rgba(255,255,255,0.06);">
+                <i class="bi bi-arrow-left"></i> Previous Page
+            </a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
