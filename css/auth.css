@@ -3,14 +3,12 @@
 ========================================== */
 .auth-page {
     min-height: 100vh;
-    min-height: 100dvh;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
     background: var(--dark);
     position: relative;
-    padding: 100px 0 40px;
     width: 100%;
+    overflow: hidden;
 }
 
 .auth-page .auth-bg {
@@ -32,7 +30,8 @@
     z-index: 2;
     width: 100%;
     max-width: 460px;
-    padding: 0 12px;
+    padding: 60px 12px;
+    margin: auto;
 }
 
 .auth-container .auth-card {
@@ -43,7 +42,6 @@
     border-radius: var(--radius-lg);
     padding: 45px 40px;
     position: relative;
-    overflow: hidden;
     animation: authCardIn 0.8s ease;
 }
 @keyframes authCardIn {
@@ -496,14 +494,14 @@
    AUTH RESPONSIVE
 ========================================== */
 @media (max-width: 991px) {
-    .auth-page { padding: 80px 0 30px; }
+    .auth-container { padding: 50px 12px; }
 }
 @media (max-width: 768px) {
-    .auth-page { padding: 70px 0 30px; }
+    .auth-container { padding: 40px 12px; }
     .auth-container .auth-card { padding: 35px 28px; }
 }
 @media (max-width: 576px) {
-    .auth-page { padding: 70px 0 30px; }
+    .auth-container { padding: 30px 12px; }
     .auth-container .auth-card { padding: 30px 20px; }
     .auth-container .social-login { flex-direction: column; }
     .auth-container .auth-header h4 { font-size: 1.3rem; }
@@ -524,7 +522,7 @@
     .auth-container .social-login .social-btn { padding: 10px; font-size: 16px; }
 }
 @media (max-width: 400px) {
-    .auth-page { padding: 50px 0 20px; }
+    .auth-container { padding: 20px 10px; }
     .auth-container .auth-card { padding: 20px 14px; }
     .auth-container .auth-header .auth-logo { font-size: 1.4rem; }
     .auth-container .auth-header h4 { font-size: 1.1rem; }
@@ -536,6 +534,7 @@
     .auth-container .auth-footer p { font-size: 0.8rem; }
 }
 @media (max-width: 360px) {
+    .auth-container { padding: 16px 8px; }
     .auth-container .auth-card { padding: 16px 10px; border-radius: 12px; }
     .auth-container .auth-header { margin-bottom: 20px; }
     .auth-container .auth-header .auth-logo { margin-bottom: 12px; }
