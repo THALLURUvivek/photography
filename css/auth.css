@@ -3,13 +3,14 @@
 ========================================== */
 .auth-page {
     min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     align-items: center;
     justify-content: center;
     background: var(--dark);
     position: relative;
-    overflow: hidden;
     padding: 100px 0 40px;
+    width: 100%;
 }
 
 .auth-page .auth-bg {
@@ -31,6 +32,7 @@
     z-index: 2;
     width: 100%;
     max-width: 460px;
+    padding: 0 12px;
 }
 
 .auth-container .auth-card {
@@ -507,13 +509,46 @@
     .auth-container .auth-header h4 { font-size: 1.3rem; }
 }
 
+@media (max-width: 480px) {
+    .auth-container .auth-card { padding: 28px 18px; }
+    .auth-container .form-group .form-control-auth { font-size: 16px; }
+    .auth-container .form-group .form-floating-label { font-size: 0.85rem; }
+    .auth-container .auth-header h4 { font-size: 1.2rem; }
+    .auth-container .auth-header p { font-size: 0.85rem; }
+    .auth-container .role-selector { gap: 8px; }
+    .auth-container .role-selector .role-option label { padding: 12px 6px; }
+    .auth-container .form-check-custom { flex-wrap: wrap; gap: 8px; }
+    .auth-container .form-check-custom a { margin-left: 0 !important; }
+    .auth-container .divider { font-size: 0.75rem; margin-bottom: 20px; }
+    .auth-container .social-login { gap: 8px; }
+    .auth-container .social-login .social-btn { padding: 10px; font-size: 16px; }
+}
 @media (max-width: 400px) {
     .auth-page { padding: 50px 0 20px; }
-    .auth-container .auth-card { padding: 20px 15px; }
+    .auth-container .auth-card { padding: 20px 14px; }
     .auth-container .auth-header .auth-logo { font-size: 1.4rem; }
     .auth-container .auth-header h4 { font-size: 1.1rem; }
     .auth-container .auth-header p { font-size: 0.8rem; }
-    .auth-container .social-login .social-btn { padding: 10px; font-size: 0.8rem; }
-    .auth-container .form-group .form-control-auth { padding: 12px; font-size: 0.85rem; }
-    .auth-container .btn-auth { padding: 12px; font-size: 0.9rem; }
+    .auth-container .social-login .social-btn { padding: 10px; font-size: 16px; }
+    .auth-container .form-group .form-control-auth { padding: 12px; font-size: 16px; }
+    .auth-container .btn-auth { padding: 12px; font-size: 16px; }
+    .auth-container .form-check-custom label { font-size: 0.8rem; }
+    .auth-container .auth-footer p { font-size: 0.8rem; }
+}
+@media (max-width: 360px) {
+    .auth-container .auth-card { padding: 16px 10px; border-radius: 12px; }
+    .auth-container .auth-header { margin-bottom: 20px; }
+    .auth-container .auth-header .auth-logo { margin-bottom: 12px; }
+    .auth-container .auth-header .auth-logo .auth-logo-img { height: 28px; }
+    .auth-container .auth-header h4 { font-size: 1rem; }
+    .auth-container .auth-header p { font-size: 0.75rem; }
+    .auth-container .role-selector { gap: 6px; }
+    .auth-container .role-selector .role-option label { padding: 10px 4px; }
+    .auth-container .role-selector .role-option label i { font-size: 1.1rem; }
+    .auth-container .role-selector .role-option label span { font-size: 0.65rem; }
+    .auth-container .form-check-custom { gap: 6px; flex-wrap: wrap; }
+    .auth-container .form-check-custom label { font-size: 0.75rem; }
+    .auth-container .social-login .social-btn { padding: 8px; font-size: 16px; }
+    .auth-container .form-group .form-control-auth { padding: 10px; font-size: 16px; }
+    .auth-container .btn-auth { padding: 10px; font-size: 16px; }
 }

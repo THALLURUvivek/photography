@@ -99,6 +99,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (errorMsg) errorMsg.classList.remove('show');
                 }
 
+                // Name validation
+                if (input.id === 'signupName' && input.value.trim()) {
+                    if (input.value.trim().length < 2) {
+                        input.classList.add('error');
+                        if (errorMsg) {
+                            errorMsg.textContent = 'Name must be at least 2 characters';
+                            errorMsg.classList.add('show');
+                        }
+                        valid = false;
+                    }
+                }
+
                 // Email validation
                 if (input.type === 'email' && input.value.trim()) {
                     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -200,6 +212,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (errorMsg) errorMsg.classList.remove('show');
             }
         });
+
+        // Name real-time validation
+        if (input.id === 'signupName') {
+            input.addEventListener('blur', () => {
+                const errorMsg = input.parentElement.querySelector('.error-msg');
+                if (input.value.trim() && input.value.trim().length < 2) {
+                    input.classList.add('error');
+                    if (errorMsg) {
+                        errorMsg.textContent = 'Name must be at least 2 characters';
+                        errorMsg.classList.add('show');
+                    }
+                }
+            });
+        }
 
         // Email real-time validation
         if (input.type === 'email') {

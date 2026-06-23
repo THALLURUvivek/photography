@@ -229,3 +229,11 @@
     .upload-thumb-overlay { font-size: 0.6rem; padding: 4px; }
     .dash-footer { font-size: 0.65rem; margin-top: 16px; padding-top: 12px; }
 }
+@media (max-width: 360px) {
+    .earning-month { min-width: 40px; font-size: 0.55rem; }
+    .earning-amount { font-size: 0.6rem; min-width: 35px; }
+    .earning-total { margin-top: 10px; padding-top: 10px; }
+    .earning-total span { font-size: 0.65rem; }
+    .earning-total strong { font-size: 0.8rem; }
+    .uploads-grid { grid-template-columns: repeat(2, 1fr); gap: 5px; }
+}

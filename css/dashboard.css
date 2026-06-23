@@ -6,6 +6,7 @@
     display: flex;
     min-height: 100vh;
     position: relative;
+    width: 100%;
 }
 .dashboard-body::before {
     content: '';
@@ -202,6 +203,7 @@
     min-height: 100vh;
     position: relative;
     z-index: 1;
+    max-width: 100%;
 }
 
 /* Top Bar */
@@ -602,6 +604,11 @@
 }
 
 /* Bookings Table */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
 .bookings-table {
     width: 100%;
     border-collapse: separate;
@@ -903,6 +910,8 @@
     .dash-topbar { flex-direction: column; align-items: flex-start; }
     .dash-topbar .topbar-actions { width: 100%; justify-content: flex-end; }
     .dash-topbar .topbar-actions .search-box input { min-width: 100px; }
+    .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .dash-card { overflow-x: auto; }
 }
 
 @media (max-width: 768px) {
@@ -917,6 +926,8 @@
     .schedule-list .schedule-time { min-width: 40px; }
     .schedule-list .schedule-time strong { font-size: 0.75rem; }
     .schedule-list .schedule-info h6 { font-size: 0.8rem; }
+    .dash-topbar .topbar-actions .user-dropdown-menu { right: auto; left: 0; }
+    input, select, textarea { font-size: 16px; }
 }
 
 @media (max-width: 576px) {
@@ -935,6 +946,37 @@
     .activity-feed .activity-content p { font-size: 0.8rem; }
     .schedule-list li { padding: 12px 0; }
     .schedule-list .schedule-info p { font-size: 0.7rem; }
+    .dash-topbar .topbar-actions .user-dropdown-menu { right: auto; left: 0; }
+}
+
+@media (max-width: 480px) {
+    .dash-main { padding: 60px 14px 16px; }
+    .dash-topbar { gap: 10px; }
+    .dash-topbar .greeting h2 { font-size: 1.15rem; }
+    .dash-topbar .greeting p { font-size: 0.8rem; flex-wrap: wrap; gap: 4px; word-break: break-all; }
+    .dash-topbar .greeting p #userRole { margin-left: 0 !important; }
+    .dash-topbar .topbar-actions { gap: 10px; }
+    .dash-topbar .topbar-actions .notif-btn { width: 38px; height: 38px; }
+    .stat-card { padding: 16px; }
+    .stat-card h3 { font-size: 1.3rem; }
+    .stat-card .stat-header .stat-icon { width: 36px; height: 36px; font-size: 1rem; }
+    .dash-card { padding: 14px; }
+    .dash-card .card-header h4 { font-size: 0.9rem; }
+    .bookings-table th, .bookings-table td { padding: 8px 6px; font-size: 0.75rem; }
+    .bookings-table td .client-avatar { width: 28px; height: 28px; }
+    .bookings-table td .client-info div span { font-size: 0.8rem; }
+    .bookings-table td .client-info div small { font-size: 0.7rem; }
+    .sidebar-toggle { width: 38px; height: 38px; }
+    .schedule-list .schedule-time { min-width: 38px; }
+    .schedule-list .schedule-time strong { font-size: 0.75rem; }
+    .schedule-list .schedule-info h6 { font-size: 0.8rem; }
+    .status-badge { font-size: 0.65rem; padding: 2px 8px; }
+    .quick-action-btn { padding: 14px; }
+    .quick-action-btn i { font-size: 1.2rem; }
+    .quick-action-btn span { font-size: 0.75rem; }
+    .activity-feed .activity-content p { font-size: 0.8rem; }
+    .activity-feed li { gap: 10px; }
+    .schedule-list li { gap: 10px; }
     .dash-topbar .topbar-actions .user-dropdown-menu { right: auto; left: 0; }
 }
 
@@ -981,4 +1023,30 @@
     .quick-action-btn span { font-size: 0.75rem; }
     .dash-topbar .topbar-actions .user-dropdown-menu { width: 170px; }
     .dash-topbar .topbar-actions .user-dropdown-menu a { font-size: 0.8rem; padding: 8px 10px; }
+}
+
+@media (max-width: 360px) {
+    .dash-main { padding: 56px 8px 10px; }
+    .dash-topbar .greeting h2 { font-size: 0.9rem; }
+    .dash-topbar .greeting p { font-size: 0.7rem; flex-wrap: wrap; gap: 2px; }
+    .dash-topbar .greeting p #userRole { margin-left: 0 !important; font-size: 0.65rem; padding: 1px 6px; }
+    .dash-topbar .topbar-actions { gap: 6px; }
+    .dash-topbar .topbar-actions .notif-btn { width: 32px; height: 32px; font-size: 0.8rem; }
+    .sidebar-toggle { width: 32px; height: 32px; font-size: 0.9rem; top: 8px; left: 8px; }
+    .stat-card { padding: 10px; }
+    .stat-card h3 { font-size: 1rem; }
+    .stat-card .stat-header .stat-icon { width: 32px; height: 32px; font-size: 0.85rem; }
+    .dash-card { padding: 10px; }
+    .dash-card .card-header h4 { font-size: 0.8rem; }
+    .bookings-table th, .bookings-table td { padding: 6px 4px; font-size: 0.7rem; }
+    .bookings-table td .client-avatar { width: 24px; height: 24px; font-size: 0.55rem; }
+    .bookings-table td .client-info div span { font-size: 0.7rem; }
+    .bookings-table td .client-info div small { font-size: 0.6rem; }
+    .quick-action-btn { padding: 10px; }
+    .quick-action-btn i { font-size: 1rem; }
+    .quick-action-btn span { font-size: 0.7rem; }
+    .schedule-list .schedule-time { min-width: 30px; }
+    .schedule-list li { padding: 8px 0; gap: 8px; }
+    .activity-feed li { padding: 8px 0; gap: 8px; }
+    .activity-feed .activity-content p { font-size: 0.7rem; }
 }
