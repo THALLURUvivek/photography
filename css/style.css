@@ -986,6 +986,11 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 0.95rem;
 }
 
+.newsletter-box .input-group-modern input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
 .newsletter-box .input-group-modern input::placeholder {
     color: var(--text-muted);
 }
