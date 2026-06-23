@@ -262,4 +262,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Force viewport scale reset on page load (fixes iOS zoom persistence on navigation)
+(function() {
+    const viewport = document.querySelector('meta[name=viewport]');
+    if (viewport) {
+        viewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0';
+    }
+})();
+window.addEventListener('pageshow', function() {
+    const viewport = document.querySelector('meta[name=viewport]');
+    if (viewport) {
+        viewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0';
+    }
+});
+
 

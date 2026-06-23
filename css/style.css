@@ -981,7 +981,7 @@ h1, h2, h3, h4, h5, h6 {
     background: transparent;
     border: none;
     padding: 15px 20px;
-    color: #fff;
+    color: #e8e8f0;
     outline: none;
     font-size: 0.95rem;
 }
@@ -1288,6 +1288,11 @@ html { scroll-padding-top: 80px; }
     width: 100%;
     height: 100%;
 }
+
+/* Prevent iOS auto-zoom on input focus (font-size must be >= 16px) */
+input, select, textarea { font-size: 16px !important; }
+
+html, body { overflow-x: hidden; width: 100%; }
 
 /* ==========================================
    RESPONSIVE
